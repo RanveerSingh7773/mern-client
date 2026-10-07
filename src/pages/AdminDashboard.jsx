@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 import { Package, ShoppingBag, TrendingUp, RefreshCw } from 'lucide-react';
 
 //Helpers 
@@ -54,7 +55,7 @@ const AdminDashboard = () => {
     //Products CRUD 
     const fetchProducts = async () => {
         try {
-            const { data } = await axios.get('http://localhost:5000/api/products');
+            const { data } = await axios.get(`${API_BASE_URL}/api/products`);
             setProducts(data);
         } catch (err) { console.error(err); }
     };
@@ -99,8 +100,8 @@ const AdminDashboard = () => {
             const config = {
                 headers: { Authorization: `Bearer ${user.token}` },
             };
-            const { data } = await axios.post('http://localhost:5000/api/upload', uploadData, config);
-            setFormData(prev => ({ ...prev, image: `http://localhost:5000${data.image}` }));
+            const { data } = await axios.post(`${API_BASE_URL}/api/upload`, uploadData, config);
+            setFormData(prev => ({ ...prev, image: `${API_BASE_URL}${data.image}` }));
             setFormSuccess('Image uploaded successfully!');
         } catch (err) {
             console.error(err);
@@ -125,11 +126,10 @@ const AdminDashboard = () => {
 
         try {
             if (editingProduct) {
-                await axios.put(`http://localhost:5000/api/products/${editingProduct._id}`, formData, authConfig());
+                await axios.put(`${API_BASE_URL}/api/products/${editingProduct._id}`, formData, authConfig());
                 setFormSuccess('Product updated successfully!');
             } else {
-                const { data: created } = await axios.post('http://localhost:5000/api/products', {}, authConfig());
-                await axios.put(`http://localhost:5000/api/products/${created._id}`, formData, authConfig());
+                await axios.post(`${API_BASE_URL}/api/products`, formData, authConfig());
                 setFormSuccess('Perfume added successfully!');
             }
             await fetchProducts();
@@ -144,7 +144,7 @@ const AdminDashboard = () => {
     const deleteProduct = async (id) => {
         if (window.confirm('Delete this product?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/products/${id}`, authConfig());
+                await axios.delete(`${API_BASE_URL}/api/products/${id}`, authConfig());
                 fetchProducts();
             } catch (err) {
                 alert(err?.response?.data?.message || 'Delete failed.');
@@ -156,7 +156,7 @@ const AdminDashboard = () => {
     const fetchOrders = async () => {
         setOrdersLoading(true);
         try {
-            const { data } = await axios.get('http://localhost:5000/api/orders', authConfig());
+            const { data } = await axios.get(`${API_BASE_URL}/api/orders`, authConfig());
             setOrders(data);
         } catch (err) { console.error(err); }
         finally { setOrdersLoading(false); }
@@ -165,7 +165,7 @@ const AdminDashboard = () => {
     const handleStatusUpdate = async (orderId, newStatus) => {
         setStatusUpdating(orderId);
         try {
-            await axios.put(`http://localhost:5000/api/orders/${orderId}/status`, { status: newStatus }, authConfig());
+            await axios.put(`${API_BASE_URL}/api/orders/${orderId}/status`, { status: newStatus }, authConfig());
             setOrders(prev => prev.map(o => o._id === orderId ? { ...o, status: newStatus } : o));
         } catch (err) {
             alert(err?.response?.data?.message || 'Status update failed.');

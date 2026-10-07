@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 import { ShoppingBag, User as UserIcon, LogOut, Settings, Menu, X } from 'lucide-react';
-import aboutImg from '../assets/ph/lakshay.jpeg';
+import aboutImg from '../assets/ph/friend.png';
 import logoImg from '../assets/ph/logo.jpeg';
 
 const Navbar = () => {
@@ -159,7 +159,7 @@ const Navbar = () => {
                         <img 
                             src={aboutImg} 
                             alt="Lakshay, Founder of Lakshaura" 
-                            className="rounded-3xl w-full h-[300px] object-cover border border-gray-200 shadow-xl"
+                            className="rounded-3xl w-full h-auto object-cover object-top border border-gray-200 shadow-xl"
                         />
                         <div>
                             <h2 className="text-3xl font-serif text-gold-DEFAULT mb-6">The Heritage of Fine Fragrance</h2>

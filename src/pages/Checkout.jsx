@@ -4,6 +4,7 @@ import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { QRCodeSVG } from 'qrcode.react';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 import { CheckCircle, ChevronRight, ShoppingBag, Clock, AlertCircle, Loader2 } from 'lucide-react';
 
 const STEPS = ['Cart Review', 'Shipping Info', 'Payment'];
@@ -120,7 +121,7 @@ const Checkout = () => {
                 };
 
                 const config = { headers: { Authorization: `Bearer ${user.token}` } };
-                const { data } = await axios.post('http://localhost:5000/api/orders', orderPayload, config);
+                const { data } = await axios.post(`${API_BASE_URL}/api/orders`, orderPayload, config);
                 setOrderId(data._id);
                 setPaymentDone(true);
                 setPlacedOrderItems(orderPayload.orderItems);

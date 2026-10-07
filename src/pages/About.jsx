@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import img2 from '../assets/ph/2..jpeg';
+import friendImg from '../assets/ph/friend.png';
 
 const About = () => {
     return (
@@ -8,11 +8,11 @@ const About = () => {
                 <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-gold-DEFAULT to-transparent shadow-[0_0_20px_rgba(255,215,0,0.5)]"></div>
                 <h1 className="text-4xl md:text-6xl font-serif text-white uppercase tracking-widest">About <span className="italic text-gold-DEFAULT lowercase">Lakshaura</span></h1>
                 
-                <div className="max-w-4xl w-full">
+                <div className="max-w-4xl w-full flex justify-center">
                     <img 
-                        src={img2} 
+                        src={friendImg} 
                         alt="About Lakshaura" 
-                        className="rounded-3xl w-full h-[400px] object-cover border border-gray-800 shadow-2xl mb-12"
+                        className="rounded-3xl w-full max-w-2xl h-auto object-cover object-top border border-gray-800 shadow-2xl mb-12"
                     />
                 </div>
 

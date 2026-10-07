@@ -84,7 +84,7 @@ const ProductCard = ({ product }) => {
                             <><Check className="w-5 h-5" /> Added to Cart!</>
                         ) : loginPrompt ? (
                             <span onClick={goToLogin} className="flex items-center gap-2 cursor-pointer">
-                                🔒 Please login to add to cart
+                                 Please login to add to cart
                             </span>
                         ) : (
                             <><ShoppingBag className="w-5 h-5" /> Add to Cart</>
@@ -150,7 +150,7 @@ const ProductCard = ({ product }) => {
                                     <><Check className="w-5 h-5" /> Added to Cart!</>
                                 ) : loginPrompt ? (
                                     <span onClick={goToLogin} className="flex items-center gap-2">
-                                        🔒 Login Required — Tap to Login
+                                         Login Required — Tap to Login
                                     </span>
                                 ) : (
                                     <><ShoppingBag className="w-5 h-5" /> Add to Cart</>

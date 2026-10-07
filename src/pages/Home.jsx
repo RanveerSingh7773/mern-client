@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 import ProductCard from '../components/ProductCard';
 
 // Importing local images from ph folder
@@ -24,9 +25,7 @@ const Home = () => {
         const fetchProducts = async () => {
             try {
                 // Assuming backend runs on 5000
-                // const { data } = await axios.get('http://localhost:5000/api/products');
-
-                const { data } = await axios.get('https://mern-back-a2r1.onrender.com/api/products');
+                const { data } = await axios.get(`${API_BASE_URL}/api/products`);
                 setProducts(data);
                 setLoading(false);
             } catch (error) {
@@ -40,17 +39,17 @@ const Home = () => {
     // Local data mapped from the ph folder
     const localPerfumes = [
         { _id: 'ph1', name: 'Royal Gold', brand: 'Lakshaura', description: 'A majestic blend of fine spices and rich elements.', price: 120, image: img1 },
-        { _id: 'ph2', name: 'Mystic Oud', brand: 'Lakshaura', description: 'Deep, woody, and long-lasting aroma.', price: 150, image: img2 },
-        { _id: 'ph3', name: 'Velvet Rose', brand: 'Lakshaura', description: 'Soft and luxurious rose notes for an elegant touch.', price: 110, image: img3 },
-        { _id: 'ph4', name: 'Oceanic Breeze', brand: 'Lakshaura', description: 'Fresh, aquatic, and deeply invigorating.', price: 95, image: img4 },
-        { _id: 'ph5', name: 'Amber Nights', brand: 'Lakshaura', description: 'Warm amber layered with a subtle touch of vanilla.', price: 140, image: img5 },
-        { _id: 'ph6', name: 'Midnight Musk', brand: 'Lakshaura', description: 'Intensely captivating and mysterious musk.', price: 135, image: img6 },
-        { _id: 'ph7', name: 'Citrus Bloom', brand: 'Lakshaura', description: 'Bright and energetic burst of fresh citrus.', price: 85, image: img7 },
-        { _id: 'ph8', name: 'Sandalwood Touch', brand: 'Lakshaura', description: 'Earthy, grounding, and exceptionally smooth.', price: 160, image: img8 },
-        { _id: 'ph9', name: 'Floral Fantasy', brand: 'Lakshaura', description: 'A beautiful bouquet of rare, exotic flowers.', price: 125, image: img9 },
-        { _id: 'ph10', name: 'Spicy Leather', brand: 'Lakshaura', description: 'A bold, confident, and unforgettable scent.', price: 170, image: img10 },
-        { _id: 'ph11', name: 'Vanilla Dream', brand: 'Lakshaura', description: 'Sweet, comforting, and irresistibly warm.', price: 105, image: img11 },
-        { _id: 'ph12', name: 'Desert Mirage', brand: 'Lakshaura', description: 'Evocative, mysterious, and beautifully crafted.', price: 180, image: img12 },
+        { _id: 'ph2', name: 'Royal Gold', brand: 'Lakshaura', description: 'Deep, woody, and long-lasting aroma.', price: 150, image: img2 },
+        { _id: 'ph3', name: 'ER7', brand: 'Lakshaura', description: 'Soft and luxurious rose notes for an elegant touch.', price: 110, image: img3 },
+        { _id: 'ph4', name: 'ER7', brand: 'Lakshaura', description: 'Fresh, aquatic, and deeply invigorating.', price: 95, image: img4 },
+        { _id: 'ph5', name: 'Noir', brand: 'Lakshaura', description: 'Warm amber layered with a subtle touch of vanilla.', price: 140, image: img5 },
+        { _id: 'ph6', name: 'Noir', brand: 'Lakshaura', description: 'Intensely captivating and mysterious musk.', price: 135, image: img6 },
+        { _id: 'ph7', name: 'White Oud', brand: 'Lakshaura', description: 'Bright and energetic burst of fresh citrus.', price: 85, image: img7 },
+        { _id: 'ph8', name: 'White Oud', brand: 'Lakshaura', description: 'Earthy, grounding, and exceptionally smooth.', price: 160, image: img8 },
+        { _id: 'ph9', name: 'Dep Sea', brand: 'Lakshaura', description: 'A beautiful bouquet of rare, exotic flowers.', price: 125, image: img9 },
+        { _id: 'ph10', name: 'Choco Musk', brand: 'Lakshaura', description: 'A bold, confident, and unforgettable scent.', price: 170, image: img10 },
+        { _id: 'ph11', name: 'Choco Musk', brand: 'Lakshaura', description: 'Sweet, comforting, and irresistibly warm.', price: 105, image: img11 },
+        { _id: 'ph12', name: 'POLO SPORTS', brand: 'Lakshaura', description: 'EAU DE PAFUM.', price: 180, image: img12 },
     ];
 
    
