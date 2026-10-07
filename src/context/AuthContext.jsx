@@ -31,10 +31,11 @@ export const AuthProvider = ({ children }) => {
             const { data } = await axios.post(`${API_BASE_URL}/api/users`, { name, email, password });
             setUser(data);
             localStorage.setItem('userInfo', JSON.stringify(data));
-            return true;
+            return { success: true };
         } catch (error) {
             console.error(error);
-            return false;
+            const message = error.response?.data?.message || 'Registration failed. Please try again.';
+            return { success: false, message };
         }
     };
 

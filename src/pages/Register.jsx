@@ -66,11 +66,11 @@ const Register = () => {
 
         setIsLoading(true);
         try {
-            const success = await register(name, email, password);
-            if (success) {
+            const res = await register(name, email, password);
+            if (res.success) {
                 navigate('/');
             } else {
-                setRegisterError('Registration failed. This email might already be registered.');
+                setRegisterError(res.message || 'Registration failed. Please try again.');
             }
         } catch (err) {
             setRegisterError('Something went wrong. Please check your connection and try again.');
