@@ -1,7 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-import { EyeIcon, FieldError, LoadingSpinner, getInputClass } from '../components/FormHelpers';
+import { EyeIcon, FieldError, LoadingSpinner } from '../components/FormHelpers';
+import { getInputClass } from '../utils/formUtils';
+import API_BASE_URL from '../config/api';
 
 const validate = (name, email, password) => {
     const errors = {};
@@ -12,7 +14,7 @@ const validate = (name, email, password) => {
     }
     if (!email.trim()) {
         errors.email = 'Email address is required.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
         errors.email = 'Please enter a valid email (e.g. user@example.com).';
     }
     if (!password) {
@@ -35,6 +37,11 @@ const Register = () => {
 
     const { register } = useContext(AuthContext);
     const navigate     = useNavigate();
+
+    // Pre-warm backend while user is typing their details
+    useEffect(() => {
+        fetch(`${API_BASE_URL}/api`, { method: 'GET' }).catch(() => {});
+    }, []);
 
     const handleBlur = (field) => {
         setTouched(prev => ({ ...prev, [field]: true }));
@@ -66,13 +73,13 @@ const Register = () => {
 
         setIsLoading(true);
         try {
-            const res = await register(name, email, password);
+            const res = await register(name.trim(), email.trim().toLowerCase(), password);
             if (res.success) {
-                navigate('/');
+                navigate('/login', { state: { message: 'Account created successfully! Please login.' } });
             } else {
                 setRegisterError(res.message || 'Registration failed. Please try again.');
             }
-        } catch (err) {
+        } catch {
             setRegisterError('Something went wrong. Please check your connection and try again.');
         } finally {
             setIsLoading(false);
